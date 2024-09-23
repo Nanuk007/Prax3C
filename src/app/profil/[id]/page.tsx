@@ -9,7 +9,9 @@ export const metadata = { title: "Detail profilov | ZoškaSnap"}
 export default function ProfileDetail() {
   return (
 
-    <Typography>Detail profilu</Typography>
+    <Container>
+      <Typography>Detail profilu</Typography>
+    </Container>
 
   );
 }

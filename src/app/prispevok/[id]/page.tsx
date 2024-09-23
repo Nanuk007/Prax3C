@@ -9,7 +9,9 @@ export const metadata = { title: "Detail prispevok | ZoškaSnap"}
 export default function PostDetail() {
   return (
 
-    <Typography>Detail prispevku</Typography>
+    <Container>
+        <Typography>Detail prispevku</Typography>
+    </Container>
 
   );
 }
