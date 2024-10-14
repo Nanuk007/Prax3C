@@ -1,16 +1,20 @@
 // src/app/(home)/page.tsx
 
-import Typography from '@mui/material/Typography';
+import { useSession } from 'next-auth/react';
+import AuthHomeView from '@/sections/AuthHomeView'; // Authenticated home view
+import NonAuthHomeView from '@/sections/NonAuthHomeView'; // Non-authenticated home view
+import { CircularProgress } from '@mui/material';
 
-export const metadata = { title: "Domov | ZoškaSnap"}
-
+export const metadata = {
+  title: "Domov | ZoškaSnap"
+};
 
 export default function Home() {
-  return (
+  const { data: session, status } = useSession();
 
-    <Typography>Home page</Typography>
+  if (status === 'loading') {
+    return <CircularProgress />; // Simple loading spinner
+  }
 
-  );
+  return session ? <AuthHomeView /> : <NonAuthHomeView />;
 }
-
-
