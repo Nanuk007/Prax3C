@@ -52,7 +52,7 @@ const NavBar = () => {
         router.push('/');
         break;
       case 1:
-        router.push('/prispevky');
+        router.push('/prispevok');
         break;
       case 2:
         router.push('/profil');
