@@ -1,20 +1,16 @@
 // src/app/(home)/page.tsx
 
-import { useSession } from 'next-auth/react';
 import AuthHomeView from '@/sections/AuthHomeView'; // Authenticated home view
 import NonAuthHomeView from '@/sections/NonAuthHomeView'; // Non-authenticated home view
-import { CircularProgress } from '@mui/material';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '../api/auth/[...nextauth]/authOptions';
 
-export const metadata = {
-  title: "Domov | ZoškaSnap"
-};
+export const metadata = {  title: "Domov | ZoškaSnap"};
 
-export default function Home() {
-  const { data: session, status } = useSession();
+export default async function Home() {
+  // Fetch sesion on the server
+  const session = await getServerSession(authOptions);
 
-  if (status === 'loading') {
-    return <CircularProgress />; // Simple loading spinner
-  }
-
-  return session ? <AuthHomeView /> : <NonAuthHomeView />;
+  // Conditionally render auth or nonauth home page
+  return session ? <AuthHomeView session = {session}/> : <NonAuthHomeView />;
 }
