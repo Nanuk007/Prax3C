@@ -1,88 +1,75 @@
 // src/components/NavBar.tsx
 
-'use client';  // Mark this component as a Client Component
+"use client";
 
 import * as React from 'react';
-import Box from '@mui/material/Box';
-import BottomNavigation from '@mui/material/BottomNavigation';
-import BottomNavigationAction from '@mui/material/BottomNavigationAction';
+import { BottomNavigation, BottomNavigationAction, Box, Avatar } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
-// import SearchIcon from '@mui/icons-material/Search';
-import AddBoxIcon from '@mui/icons-material/AddBox';
-// import FavoriteIcon from '@mui/icons-material/Favorite';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { usePathname, useRouter } from 'next/navigation';
-// import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-// import Login from '@/app/auth/prihlasenie/page';
+import SearchIcon from '@mui/icons-material/Search';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 import LoginIcon from '@mui/icons-material/Login';
+import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 import LogoutIcon from '@mui/icons-material/Logout';
+import { useRouter } from 'next/navigation';
+import { useSession } from "next-auth/react";
 
-const NavBar = () => {
-  const [value, setValue] = React.useState(0);
-  const pathname = usePathname();
+export default function Navbar() {
+  const [value, setValue] = React.useState('/');
   const router = useRouter();
+  const { data: session, status } = useSession();
 
-  React.useEffect(() => {
-    switch (pathname) {
-      case '/':
-        setValue(0);
-        break;
-      case '/vyhladavanie':
-        setValue(1);
-        break;
-      case '/pridat':
-        setValue(2);
-        break;
-      case '/notifikacie':
-        setValue(3);
-        break;
-      case '/profile':
-        setValue(4);
-        break;
-      default:
-        setValue(0);
-        break;
-    }
-  }, [pathname]);
-
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+  const handleNavigation = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
-    switch (newValue) {
-      case 0:
-        router.push('/');
-        break;
-      case 1:
-        router.push('/prispevok');
-        break;
-      case 2:
-        router.push('/profil');
-        break;
-      case 3:
-        router.push('/auth/prihlasenie');
-        break;
-      case 4:
-        router.push('/auth/odhlasenie');
-        break;
-      default:
-        break;
-    }
+    router.push(newValue);
   };
 
+  // Non-authenticated navigation paths
+  const nonAuthPaths = [
+    { label: "Domov", value: "/", icon: <HomeIcon /> },
+    { label: "Prispevky", value: "/prispevok", icon: <AddCircleIcon /> },
+    { label: "Registrácia", value: "/auth/registracia", icon: <AppRegistrationIcon /> },
+    { label: "Prihlásenie", value: "/auth/prihlasenie", icon: <LoginIcon /> }
+  ];
+
+  // Authenticated navigation paths
+  const authPaths = [
+    { label: "Domov", value: "/", icon: <HomeIcon /> },
+    { label: "Hľadať", value: "/hladat", icon: <SearchIcon /> },
+    { label: "Pridať", value: "/prispevok", icon: <AddCircleIcon /> },
+    {
+      label: "Profil",
+      value: "/profil",
+      icon: session?.user?.image ? (
+        <Avatar 
+          alt={session?.user?.name || "User"} 
+          src={session?.user?.image || undefined} 
+        />
+      ) : (
+        <Avatar>{session?.user?.name?.charAt(0) || "U"}</Avatar>
+      )
+    },
+    { label: "Odhlásiť", value: "/auth/odhlasenie", icon: <LogoutIcon /> },
+  ];
+
+  // Decide which paths to use based on authentication status
+  const navigationPaths = status === "authenticated" ? authPaths : nonAuthPaths;
+
   return (
-    <Box sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }}>
+    <Box sx={{ width: '100%', position: 'fixed', bottom: 0 }}>
       <BottomNavigation
         showLabels
         value={value}
-        onChange={handleChange}
+        onChange={handleNavigation}
       >
-        <BottomNavigationAction label="Home" icon={<HomeIcon />} />
-        <BottomNavigationAction label="Prispevky" icon={<AddBoxIcon />} />
-        <BottomNavigationAction label="Profili" icon={<AccountCircleIcon/>} />
-        <BottomNavigationAction label="Sign In" icon={<LoginIcon />} />
-        <BottomNavigationAction label="Sign Out" icon={<LogoutIcon />} />
+        {navigationPaths.map((path) => (
+          <BottomNavigationAction
+            key={path.value}
+            label={path.label}
+            value={path.value}
+            icon={path.icon}
+          />
+        ))}
       </BottomNavigation>
     </Box>
   );
-};
-
-export default NavBar;
+}
