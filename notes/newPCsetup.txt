@@ -1,0 +1,27 @@
+Windows PowerShell terminal:
+wsl –-install
+user name: menopriezvisko
+password:
+
+
+VsCode:
+Wsl
+File -> Auto Save 
+Extensions WSL UBUNTU install: GitHub Pull Requests, GitLens, Prettier - Code formatter
+Terminal -> New terminal
+menopriezvisko@DESKTOP-XYZ:~$
+sudo apt install unzip
+Google: nodejs download -> https://nodejs.org/en/download/package-manager
+...
+node -v
+npm -v
+mkdir dev
+cd dev/
+git clone https://github.com/sille-zoska/snap-zoska-4h.git
+File -> Open folder -> dev -> snap-zoska-4h -> OK
+menopriezvisko@DESKTOP-XYZ:~/dev/snap-zoska-4h$
+git config user.name "sille-zoska"
+git config user.email "sille@zochova.sk"
+git remote -v
+npm install
+urobte zmenu (novy riadok) v niektorej page.tsx: commit, sync
