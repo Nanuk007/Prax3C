@@ -1,0 +1,13 @@
+# SK:
+1. Na vyučovaciu hodinu chodíš včas. Ak začína o 8:00, tak Tvoj príchod o 8:01 je pozdný.
+2. Ak si naposledy chýbal, tak dnes už máš kód z chýbajúcich hodín integrovaný vo svojom projekte. Všetko potrebné nájdeš v skupine na Github.
+3. Na hodine aktívne pracuješ na svojom projekte a sleduješ, čo sa deje. Mobil si počas hodiny odkladáš alebo používaš len na účely vyučovania.
+4. Ak narazíš na problém, najprv sa pokús ho vyriešiť sám. Ak si však nevieš rady, neboj sa spýtať učiteľa — otázky sú vítané!
+5. Svoje poznámky a projekt pravidelne zálohuješ na GitHub. Tým sa vyhneš zbytočnej strate práce a je to skvelý návyk pre vývojára.
+
+# IT:
+1.  if arrival_time > 8:00 then arrival_status = "late";
+2.  if last_class == "absent" then today's_project.includes(missing_code) == true;
+3.  if mobile_usage == "non-educational" then mobile_mode = "off";
+4.  if encounter_problem then (try_to_solve_it == true) else if (unable_to_solve) then (ask_teacher == true);
+5.  if project.backup == false then project.github_sync();

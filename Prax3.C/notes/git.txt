@@ -1,0 +1,11 @@
+git clone https://github.com/Nanuk007/Prax3C
+cd snap-zoska
+git init
+git branch -m main
+git config user.name "nanuk007"
+git config user.email "karaffa.filip@gmail.com"
+git remote add origin https://github.com/Nanuk007/Prax3C
+git remote -v
+
+
+VsCode Source control -> Initial -> Commit -> Publish branch (Sync)

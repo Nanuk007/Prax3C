@@ -1,0 +1,23 @@
+# .env
+ 
+ 
+NEXTAUTH_URL=http://localhost:3000/
+# Production .env
+# NEXTAUTH_URL=https://zoska-snap.vercel.app/
+ 
+NEXTAUTH_SECRET=
+ 
+# 0Auth client
+# Google
+GOOGLE_CLIENT_ID=25626511538-3op0nm9m42urs2q5cioti71vpdqjj6sq.apps.googleusercontent.com
+GOOGLE_CLIENT_SECRET=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
+# Facebook
+FACEBOOK_CLIENT_ID=
+FACEBOOK_CLIENT_SECRET=
+
+# Database
+POSTGRES_URL=postgres://neondb_owner:NLW3rS1jsvmF@ep-withered-thunder-a24aia2o-pooler.eu-central-1.aws.neon.tech/neondb?sslmode=require
+Domov | ZoškaSnap
+Created by students of SPŠE Zochova 9, Bratislava
+ 
+
