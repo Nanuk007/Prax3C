@@ -1,6 +1,6 @@
 // src\app\auth\overenie\page.tsx
 
-import SignVerifyView from "../../../sections/SigVerifyView";
+import SignVerifyView from "@/sections/SigVerifyView";
 
 export const metadata = { title: "Overenie účtu | ZoškaSnap" };
 
